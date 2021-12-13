@@ -1,10 +1,10 @@
-import * as Yup from 'yup';
-import { useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useFormik, Form, FormikProvider } from 'formik';
-import { Icon } from '@iconify/react';
-import eyeFill from '@iconify/icons-eva/eye-fill';
-import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
+import * as Yup from "yup";
+import { useState, useContext } from "react";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useFormik, Form, FormikProvider } from "formik";
+import { Icon } from "@iconify/react";
+import eyeFill from "@iconify/icons-eva/eye-fill";
+import eyeOffFill from "@iconify/icons-eva/eye-off-fill";
 // material
 import {
   Link,
@@ -13,34 +13,78 @@ import {
   TextField,
   IconButton,
   InputAdornment,
-  FormControlLabel
-} from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+  FormControlLabel,
+} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import axios from "axios";
+import { APIConfig } from "src/store/Api-Config";
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
+  const APIs = useContext(APIConfig);
+  const loginAPI = APIs.loginAPI;
+
+  //const loginAPI = "http://172.19.143.222:8080/login";
+  console.log(loginAPI);
+
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required')
+    email: Yup.string()
+      .email("Email must be a valid email address")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
   });
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
-      remember: true
+      email: "",
+      password: "",
+      remember: true,
     },
     validationSchema: LoginSchema,
     onSubmit: () => {
-      navigate('/dashboard', { replace: true });
-    }
+      const headers = {
+        "Access-Control-Allow-Origin": "*",
+      };
+
+      console.log("inside user login-POST request");
+
+      const data = {
+        username: formik.values.email,
+        password: formik.values.password,
+      };
+
+      axios
+        .post(loginAPI, data, { headers })
+        .then((res) => {
+          const response = res.data;
+          if (
+            response == null ||
+            response == "" ||
+            response.username != data.username
+          ) {
+            alert("error happened during registration. try again ");
+
+            navigate("/register", { replace: true });
+          } else {
+            alert("User registration is successful. redirecting to Login");
+            navigate("/login", { replace: true });
+
+            return response;
+          }
+        })
+        .catch((error) => {
+          console.log(error.message);
+          alert("error happened during registration. Check your data first");
+        });
+    },
   });
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
+  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
+    formik;
 
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
@@ -55,7 +99,7 @@ export default function LoginForm() {
             autoComplete="username"
             type="email"
             label="Email address"
-            {...getFieldProps('email')}
+            {...getFieldProps("email")}
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
           />
@@ -63,9 +107,9 @@ export default function LoginForm() {
           <TextField
             fullWidth
             autoComplete="current-password"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             label="Password"
-            {...getFieldProps('password')}
+            {...getFieldProps("password")}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -73,16 +117,26 @@ export default function LoginForm() {
                     <Icon icon={showPassword ? eyeFill : eyeOffFill} />
                   </IconButton>
                 </InputAdornment>
-              )
+              ),
             }}
             error={Boolean(touched.password && errors.password)}
             helperText={touched.password && errors.password}
           />
         </Stack>
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ my: 2 }}
+        >
           <FormControlLabel
-            control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
+            control={
+              <Checkbox
+                {...getFieldProps("remember")}
+                checked={values.remember}
+              />
+            }
             label="Remember me"
           />
 

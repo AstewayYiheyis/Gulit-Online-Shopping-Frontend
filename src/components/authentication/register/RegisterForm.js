@@ -1,58 +1,105 @@
-import * as Yup from 'yup';
-import { useState } from 'react';
-import { Icon } from '@iconify/react';
-import { useFormik, Form, FormikProvider } from 'formik';
-import eyeFill from '@iconify/icons-eva/eye-fill';
-import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
-import { useNavigate } from 'react-router-dom';
+import * as Yup from "yup";
+import { useState, useContext } from "react";
+import { Icon } from "@iconify/react";
+import { useFormik, Form, FormikProvider } from "formik";
+import eyeFill from "@iconify/icons-eva/eye-fill";
+import eyeOffFill from "@iconify/icons-eva/eye-off-fill";
+import { useNavigate } from "react-router-dom";
 // material
-import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import { Stack, TextField, IconButton, InputAdornment } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import axios from "axios";
+import { APIConfig } from "src/store/Api-Config";
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
+  const APIs = useContext(APIConfig);
+  const userAPI = APIs.userAPI;
+
+  //const userAPI = "http://172.19.143.222:8080/users/";
+  console.log(userAPI);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('First name required'),
-    lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required')
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("First name required"),
+    lastName: Yup.string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Last name required"),
+    email: Yup.string()
+      .email("Email must be a valid email address")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
   });
 
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
     },
     validationSchema: RegisterSchema,
     onSubmit: () => {
-      console.log(formik.values);
-      navigate('/dashboard', { replace: true });
-    }
+      const headers = {
+        "Access-Control-Allow-Origin": "*",
+      };
+
+      console.log("inside user registration-POST request");
+
+      console.log(userAPI);
+
+      const data = {
+        username: formik.values.email,
+        firstName: formik.values.firstName,
+        lastName: formik.values.lastName,
+        email: formik.values.email,
+        password: formik.values.password,
+        enabled: true,
+      };
+
+      axios
+        .post(userAPI, data, { headers })
+        .then((res) => {
+          const response = res.data;
+          if (
+            response == null ||
+            response == "" ||
+            response.username != data.username
+          ) {
+            alert("error happened during registration. try again ");
+
+            navigate("/register", { replace: true });
+          } else {
+            alert("User registration is successful. redirecting to Login");
+            navigate("/login", { replace: true });
+
+            return response;
+          }
+        })
+        .catch((error) => {
+          console.log(error.message);
+          alert("error happened during registration. Check your data first");
+        });
+    },
   });
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+  const { errors, touched, handleSubmit, getFieldProps } = formik;
 
-  const registerUser = () =>  console.log(getFieldProps);
-
-  
   return (
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
             <TextField
               fullWidth
               label="First name"
-              {...getFieldProps('firstName')}
+              {...getFieldProps("firstName")}
               error={Boolean(touched.firstName && errors.firstName)}
               helperText={touched.firstName && errors.firstName}
             />
@@ -60,7 +107,7 @@ export default function RegisterForm() {
             <TextField
               fullWidth
               label="Last name"
-              {...getFieldProps('lastName')}
+              {...getFieldProps("lastName")}
               error={Boolean(touched.lastName && errors.lastName)}
               helperText={touched.lastName && errors.lastName}
             />
@@ -71,7 +118,7 @@ export default function RegisterForm() {
             autoComplete="username"
             type="email"
             label="Email address"
-            {...getFieldProps('email')}
+            {...getFieldProps("email")}
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
           />
@@ -79,17 +126,20 @@ export default function RegisterForm() {
           <TextField
             fullWidth
             autoComplete="current-password"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             label="Password"
-            {...getFieldProps('password')}
+            {...getFieldProps("password")}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
+                  <IconButton
+                    edge="end"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
                     <Icon icon={showPassword ? eyeFill : eyeOffFill} />
                   </IconButton>
                 </InputAdornment>
-              )
+              ),
             }}
             error={Boolean(touched.password && errors.password)}
             helperText={touched.password && errors.password}
@@ -100,8 +150,6 @@ export default function RegisterForm() {
             size="large"
             type="submit"
             variant="contained"
-            loading={isSubmitting}
-            onClick={registerUser}
           >
             Register
           </LoadingButton>
