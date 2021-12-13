@@ -26,9 +26,9 @@ const hideCartHandler = () => {
 
 
     
-    console.log('inside product detail' ) ;
-    let { id } = useParams();
-   console.log(id);
+  console.log('inside product detail' ) ;
+  let { id } = useParams();
+  console.log(id);
 
    
   const APIs = useContext(APIConfig);
