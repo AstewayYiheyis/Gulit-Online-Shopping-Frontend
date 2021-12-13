@@ -20,7 +20,6 @@ export default function AddressForm() {
   //const userAPI = "http://172.19.143.222:8080/users/";
   console.log(addressAPI);
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
 
   const RegisterSchema = Yup.object().shape({
     streetAddress: Yup.string()
@@ -69,10 +68,10 @@ export default function AddressForm() {
             response == "") {
             alert("error happened during Address registry. try again ");
 
-            navigate("/address", { replace: true });
+            navigate("/addresses", { replace: true });
           } else {
             alert("Address registration is successful.");
-            navigate("/", { replace: true });
+            navigate("/dashboard", { replace: true });
 
             return response;
           }
