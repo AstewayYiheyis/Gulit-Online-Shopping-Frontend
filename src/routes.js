@@ -11,7 +11,7 @@ import Blog from "./pages/Blog";
 import User from "./pages/User";
 import NotFound from "./pages/Page404";
 
-import ProductDetail from './pages/ProductDetail';
+import ProductDetail from "./pages/ProductDetail";
 import Cart from "./layouts/Cart";
 // ----------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ export default function Router() {
         { path: "user", element: <User /> },
         { path: "products", element: <Products /> },
         { path: "checkout", element: <Cart /> },
-        { path: "products/:id", element: <ProductDetail/> },
+        { path: "products/:id", element: <ProductDetail /> },
         { path: "blog", element: <Blog /> },
       ],
     },

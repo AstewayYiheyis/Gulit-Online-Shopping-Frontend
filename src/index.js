@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 // scroll bar
 import "simplebar/src/simplebar.css";
@@ -13,39 +13,27 @@ import * as serviceWorker from "./serviceWorker";
 import reportWebVitals from "./reportWebVitals";
 import { APIConfig } from "./store/Api-Config";
 
- 
-
 // ----------------------------------------------------------------------
 
 const base = "http://172.19.143.222:8080/";
- 
-
-
 
 ReactDOM.render(
-
-
-
-
-    <HelmetProvider>
-      <BrowserRouter> 
-     <APIConfig.Provider   value={
-         {
+  <APIConfig.Provider
+    value={{
       ProductAPI: base + "products/",
       CardAPI: base + "cart/",
-      orderAPI: base + "order/",
-    }
-    }
+      orderAPI: base + "orders/",
+      userAPI: base + "users/",
+      loginAPI: base + "login",
+    }}
   >
-
+    <HelmetProvider>
+      <BrowserRouter>
         <App />
-         </APIConfig.Provider>
-       
       </BrowserRouter>
-    </HelmetProvider>,
- 
-     
-   
+    </HelmetProvider>
+  </APIConfig.Provider>,
+
   document.getElementById("root")
 );
 
