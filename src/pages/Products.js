@@ -53,18 +53,17 @@ export default function EcommerceShop() {
   const APIs = useContext(APIConfig);
   const productAPI = APIs.ProductAPI;
 
-
   const [productList, setProductList] = useState([
     {
-      name: "Nike Zoom 12",
+      name: "",
       cover: mockImgProduct(1),
-      price: 142.2,
+      price: 0,
       status: "",
-      description: "Nike Summer shoes confrtable",
-      priceSale: 123,
-      id: 1,
+      description: "",
+      priceSale: 0,
+      id: 0,
       isActive: true,
-      quantity: 15,
+      quantity: 0,
     },
   ]);
   function fetchProductsHandler() {
@@ -124,7 +123,6 @@ export default function EcommerceShop() {
             <ProductSort />
           </Stack>
         </Stack>
-
         <ProductList products={productList} />
         <ProductCartWidget />
       </Container>
