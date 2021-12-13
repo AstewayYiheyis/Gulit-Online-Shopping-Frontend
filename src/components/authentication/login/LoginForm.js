@@ -5,6 +5,9 @@ import { useFormik, Form, FormikProvider } from "formik";
 import { Icon } from "@iconify/react";
 import eyeFill from "@iconify/icons-eva/eye-fill";
 import eyeOffFill from "@iconify/icons-eva/eye-off-fill";
+
+import { TokenService } from "src/storage.service";
+
 // material
 import {
   Link,
@@ -61,24 +64,25 @@ export default function LoginForm() {
         .post(loginAPI, data, { headers })
         .then((res) => {
           const response = res.data;
-          if (
-            response == null ||
-            response == "" ||
-            response.username != data.username
-          ) {
-            alert("error happened during registration. try again ");
 
-            navigate("/register", { replace: true });
-          } else {
-            alert("User registration is successful. redirecting to Login");
+          console.log(response);
+          if (response == null || response == "") {
+            alert("please check your username/password. ");
+
             navigate("/login", { replace: true });
+          } else {
+            TokenService.saveToken(response.jwt);
+            console.log("saved token is ");
+            console.log(TokenService.getToken());
+
+            navigate("/dashboard/app", { replace: true });
 
             return response;
           }
         })
         .catch((error) => {
           console.log(error.message);
-          alert("error happened during registration. Check your data first");
+          alert("error happened. Check your detail");
         });
     },
   });
@@ -145,13 +149,7 @@ export default function LoginForm() {
           </Link>
         </Stack>
 
-        <LoadingButton
-          fullWidth
-          size="large"
-          type="submit"
-          variant="contained"
-          loading={isSubmitting}
-        >
+        <LoadingButton fullWidth size="large" type="submit" variant="contained">
           Login
         </LoadingButton>
       </Form>
