@@ -27,9 +27,10 @@ const sidebarConfig = [
     path: "/dashboard/products",
     icon: getIcon(shoppingBagFill),
   },
+
   {
-    title: "Seller Management",
-    path: "/dashboard/ApproveSeller",
+    title: "Product Registration",
+    path: "/dashboard/product",
     icon: getIcon(fileTextFill),
   },
   {
@@ -38,14 +39,29 @@ const sidebarConfig = [
     icon: getIcon(fileTextFill),
   },
   {
+    title: "Seller Management",
+    path: "/dashboard/ApproveSeller",
+    icon: getIcon(personAddFill),
+  },
+  {
+    title: "Buyer Registration",
+    path: "/buyer-register",
+    icon: getIcon(personAddFill),
+  },
+  {
+    title: "Seller Registration",
+    path: "/seller-register",
+    icon: getIcon(fileTextFill),
+  },
+  {
+    title: "register-Admin",
+    path: "/register",
+    icon: getIcon(personAddFill),
+  },
+  {
     title: "login",
     path: "/login",
     icon: getIcon(lockFill),
-  },
-  {
-    title: "register",
-    path: "/register",
-    icon: getIcon(personAddFill),
   },
 ];
 export default sidebarConfig;

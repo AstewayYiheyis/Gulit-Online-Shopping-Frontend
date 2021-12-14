@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 import { sentenceCase } from "change-case";
 import plusFill from "@iconify/icons-eva/plus-fill";
 import { Link as RouterLink } from "react-router-dom";
-
+import _ from "lodash";
 // material
 import {
   Card,
@@ -99,16 +99,20 @@ export default function ApproveSeller() {
         const response = res.data;
 
         console.log(response);
-        setList(...response, {
-          id: response.sellerId,
-          avatarUrl: mockImgAvatar(0),
-          name: response.user.firstName,
-          company: response.company,
-          isVerified: response.approved,
-          status: response.approved == true ? "approved" : "waitig aproval",
-          role: "Seller",
+        let updated = _.map(response, (data) => {
+          return {
+            id: data.sellerId,
+            avatarUrl: mockImgAvatar(0),
+            name: data.user.firstName + " " + data.user.lastName,
+            company: data.company,
+            isVerified: data.approved,
+            status: data.approved == true ? "approved" : "waitig aproval",
+            role: "Seller",
+          };
         });
-        return USERLIST;
+        console.log("my updated ");
+        console.log(updated);
+        setList(updated);
       })
       .catch((error) => {
         console.log(error.message);
@@ -197,10 +201,10 @@ export default function ApproveSeller() {
           <Button
             variant="contained"
             component={RouterLink}
-            to="#"
+            to="../user"
             startIcon={<Icon icon={plusFill} />}
           >
-            New User
+            Buyer and Seller
           </Button>
         </Stack>
 

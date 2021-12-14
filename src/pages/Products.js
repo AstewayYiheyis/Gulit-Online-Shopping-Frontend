@@ -16,6 +16,7 @@ import {
   ProductCartWidget,
   ProductFilterSidebar,
 } from "../components/_dashboard/products";
+import { APIService } from "src/storage.service";
 
 // ----------------------------------------------------------------------
 
@@ -50,9 +51,7 @@ export default function EcommerceShop() {
     resetForm();
   };
 
-  const APIs = useContext(APIConfig);
-  //const productAPI = APIs.ProductAPI;
-  const productAPI = "http://localhost:8080/products";
+  const productAPI = APIService.productAPI;
 
   const [productList, setProductList] = useState([
     {

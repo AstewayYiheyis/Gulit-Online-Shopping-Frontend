@@ -37,8 +37,8 @@ export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  console.log("done manually");
-  TokenService.saveToken("deee");
+  // console.log("done manually");
+  //TokenService.saveToken("deee");
 
   const isLoggedIn = TokenService.getToken();
   console.log(TokenService.getToken());
@@ -46,6 +46,7 @@ export default function DashboardLayout() {
   const [redirect, setRedirect] = useState(false);
 
   function redirectTo() {
+    alert("you have to login first");
     window.location.reload(true);
     navigate("/login");
   }
