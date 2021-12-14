@@ -18,6 +18,7 @@ import SellerRegister from "./pages/SellerRegister"
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./layouts/Cart";
 import ApproveSeller from "./pages/ApproveSeller";
+import Order from "./pages/Order"
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -36,6 +37,7 @@ export default function Router() {
         { path: "products/:id", element: <ProductDetail /> },
         { path: "blog", element: <Blog /> },
         { path: "approveSeller", element: <ApproveSeller /> },
+        { path: "orders", element: <Order /> },
       ],
     },
     {

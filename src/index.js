@@ -27,8 +27,7 @@ ReactDOM.render(
       buyerAPI: base + "buyers/",
       sellerAPI: base + "sellers/",
       loginAPI: base + "login/",
-      addressAPI: base + "addresses/",
-      sellerAPI: base + "sellers/",
+      addressAPI: base + "addresses/"
     }}
   >
     <HelmetProvider>

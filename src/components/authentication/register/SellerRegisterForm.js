@@ -87,7 +87,7 @@ export default function SellerRegisterForm() {
                         navigate("/seller-register", { replace: true });
                     } else {
                         alert("User registration is successful. redirecting to Login");
-                        navigate("/dashboard", { replace: true });
+                        navigate("/login", { replace: true });
 
                         return response;
                     }
