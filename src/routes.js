@@ -12,6 +12,8 @@ import User from "./pages/User";
 import Address from "./pages/Address";
 import NotFound from "./pages/Page404";
 import ProductInput from "./pages/ProductInput";
+import BuyerRegister from "./pages/BuyerRegister"
+import SellerRegister from "./pages/SellerRegister"
 
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./layouts/Cart";
@@ -40,6 +42,8 @@ export default function Router() {
       children: [
         { path: "login", element: <Login /> },
         { path: "register", element: <Register /> },
+        { path: "seller-register", element: <SellerRegister /> },
+        { path: "buyer-register", element: <BuyerRegister /> },
         { path: "404", element: <NotFound /> },
         { path: "/", element: <Navigate to="/dashboard" /> },
         { path: "*", element: <Navigate to="/404" /> },
