@@ -51,7 +51,8 @@ export default function EcommerceShop() {
   };
 
   const APIs = useContext(APIConfig);
-  const productAPI = APIs.ProductAPI;
+  //const productAPI = APIs.ProductAPI;
+  const productAPI = "http://localhost:8080/products";
 
   const [productList, setProductList] = useState([
     {

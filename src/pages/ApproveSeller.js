@@ -1,9 +1,11 @@
+import React, { useState, useContext, useEffect } from "react";
+
 import { filter } from "lodash";
 import { Icon } from "@iconify/react";
 import { sentenceCase } from "change-case";
-import { useState } from "react";
 import plusFill from "@iconify/icons-eva/plus-fill";
 import { Link as RouterLink } from "react-router-dom";
+
 // material
 import {
   Card,
@@ -30,8 +32,11 @@ import {
   UserListToolbar,
   UserMoreMenu,
 } from "../components/_dashboard/user";
+import { APIConfig } from "src/store/Api-Config";
+import { TokenService, APIService } from "src/storage.service";
+import axios from "axios";
+import { mockImgAvatar } from "src/utils/mockImages";
 //
-import USERLIST from "../_mocks_/user";
 
 // ----------------------------------------------------------------------
 
@@ -78,7 +83,41 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function User() {
+export default function ApproveSeller() {
+  const sellerAPI = APIService.sellerAPI;
+
+  const [USERLIST, setList] = useState([]);
+
+  function fetchSellersHandler() {
+    const headers = TokenService.getHeaderwithToken();
+
+    console.log("inside sellers get request" + headers);
+
+    console.log(sellerAPI);
+    axios(sellerAPI, { headers })
+      .then((res) => {
+        const response = res.data;
+
+        console.log(response);
+        setList(...response, {
+          id: response.sellerId,
+          avatarUrl: mockImgAvatar(0),
+          name: response.user.firstName,
+          company: response.company,
+          isVerified: response.approved,
+          status: response.approved == true ? "approved" : "waitig aproval",
+          role: "Seller",
+        });
+        return USERLIST;
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }
+  console.log(USERLIST);
+  console.log(USERLIST);
+  useEffect(fetchSellersHandler, []); // This will be fetched when mounted
+
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState("asc");
   const [selected, setSelected] = useState([]);

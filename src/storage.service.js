@@ -32,6 +32,14 @@ const TokenService = {
   removeRefreshToken() {
     localStorage.removeItem(REFRESH_TOKEN_KEY);
   },
+  getHeaderwithToken() {
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
+      // Authorization: "Bearer " + TokenService.getToken(),
+    };
+
+    return headers;
+  },
 };
 
 const SetUser = {
@@ -51,5 +59,16 @@ const SetUser = {
     localStorage.removeItem(USER);
   },
 };
+const base = "http://localhost:8080/";
 
-export { TokenService, SetUser };
+const APIService = {
+  productAPI: base + "products/",
+  CardAPI: base + "cart/",
+  orderAPI: base + "orders/",
+  userAPI: base + "users/",
+  loginAPI: base + "login/",
+  addressAPI: base + "addresses/",
+  sellerAPI: base + "sellers/",
+};
+
+export { TokenService, SetUser, APIService };
