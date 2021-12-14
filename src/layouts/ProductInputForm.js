@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { Icon } from "@iconify/react";
 import { useFormik, Form, FormikProvider } from "formik";
 import { useNavigate } from "react-router-dom";
-import { Stack, TextField, TextareaAutosize} from "@mui/material";
+import { Stack, TextField, TextareaAutosize } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import axios from "axios";
 import { APIConfig } from "src/store/Api-Config";
@@ -14,17 +14,13 @@ export default function ProductInputForm() {
   const APIs = useContext(APIConfig);
   const productAPI = APIs.productAPI;
 
-  //const userAPI = "http://172.19.143.222:8080/users/";
   console.log(productAPI);
   const navigate = useNavigate();
 
   const RegisterSchema = Yup.object().shape({
-    productName: Yup.string()
-      .required("Product name is required"),
-    stockAmount: Yup.string()
-    .required("Amount in Stock is required"),
-    price: Yup.string()
-    .required("Price is required"),
+    productName: Yup.string().required("Product name is required"),
+    stockAmount: Yup.string().required("Amount in Stock is required"),
+    price: Yup.string().required("Price is required"),
     // category: Yup.string()
     // .required("Category is required"),
     // brand: Yup.string()
@@ -36,9 +32,9 @@ export default function ProductInputForm() {
       productName: "",
       description: "",
       stockAmount: 0,
-      price: 0.00,
-      brand: null, 
-      category: null
+      price: 0.0,
+      brand: null,
+      category: null,
     },
     validationSchema: RegisterSchema,
     onSubmit: () => {
@@ -60,16 +56,14 @@ export default function ProductInputForm() {
         category: formik.values.category,
         brand: formik.values.brand,
         images: [],
-        cartItems: []
+        cartItems: [],
       };
 
       axios
         .post(productAPI, data, { headers })
         .then((res) => {
           const response = res.data;
-          if (
-            response == null ||
-            response == "") {
+          if (response == null || response == "") {
             alert("error happened during Product registry. try again ");
 
             navigate("product", { replace: true });
@@ -84,7 +78,7 @@ export default function ProductInputForm() {
           console.log(error.message);
           alert("error happened Product registration. Check your data first");
         });
-        console.log(data);
+      console.log(data);
     },
   });
 
@@ -103,24 +97,24 @@ export default function ProductInputForm() {
               helperText={touched.productName && errors.productName}
             />
 
-        <TextField
-            fullWidth
-            label="Price"
-            {...getFieldProps("price")}
-            error={Boolean(touched.price && errors.price)}
-            helperText={touched.price && errors.price}
-          />
+ <TextField
+              fullWidth
+              label="Price"
+              {...getFieldProps("price")}
+              error={Boolean(touched.price && errors.price)}
+              helperText={touched.price && errors.price}
+            />          
           </Stack>
 
           <TextareaAutosize
-              fullWidth
+            fullWidth
             placeholder="Product Description"
             area-label="Product Description"
             style={{ minHeight: 100 }}
             {...getFieldProps("description")}
-              error={Boolean(touched.description && errors.description)}
-              helperText={touched.description && errors.description}
-            />
+            error={Boolean(touched.description && errors.description)}
+            helperText={touched.description && errors.description}
+          />
 
           <TextField
             fullWidth
@@ -129,7 +123,6 @@ export default function ProductInputForm() {
             error={Boolean(touched.stockAmount && errors.stockAmount)}
             helperText={touched.stockAmount && errors.stockAmount}
           />
-
           <LoadingButton
             fullWidth
             size="large"

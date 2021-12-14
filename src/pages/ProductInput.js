@@ -2,8 +2,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Box, Card, Link, Container, Typography } from "@mui/material";
 import Page from "../components/Page";
-import ProductInputForm from "../layouts/ProductInputForm"
-
+import ProductInputForm from "../layouts/ProductInputForm";
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +28,7 @@ const ContentStyle = styled("div")(({ theme }) => ({
   minHeight: "100vh",
   flexDirection: "column",
   justifyContent: "center",
-  padding: theme.spacing(12, 0)
+  padding: theme.spacing(12, 0),
 }));
 
 // ----------------------------------------------------------------------
@@ -50,16 +49,7 @@ export default function ProductInput() {
             variant="body2"
             align="center"
             sx={{ color: "text.secondary", mt: 3 }}
-          >
-            By registering, I agree to Minimal&nbsp;
-            <Link underline="always" sx={{ color: "text.primary" }}>
-              Terms of Service
-            </Link>
-            &nbsp;and&nbsp;
-            <Link underline="always" sx={{ color: "text.primary" }}>
-              Privacy Policy
-            </Link>
-          </Typography>
+          ></Typography>
         </ContentStyle>
       </Container>
     </RootStyle>

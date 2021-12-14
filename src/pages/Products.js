@@ -71,7 +71,7 @@ export default function EcommerceShop() {
       "Access-Control-Allow-Origin": "*",
     };
 
-    console.log("inside get request");
+    console.log("inside products get request");
     console.log(productAPI);
     axios(productAPI, { headers })
       .then((res) => {
@@ -79,17 +79,6 @@ export default function EcommerceShop() {
 
         console.log(response);
         setProductList(response);
-
-        // {
-        //   id: response.id,
-        //   cover: mockImgProduct(1),
-        //   name: response.name,
-        //   price: response.price,
-        //   priceSale: response.price,
-        //   colors: ["#00AB55"],
-        //   status: response.isActive === true ? null : "Not Available",
-        // }
-
         return productList;
       })
       .catch((error) => {
