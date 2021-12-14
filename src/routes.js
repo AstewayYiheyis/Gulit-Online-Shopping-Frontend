@@ -12,8 +12,8 @@ import User from "./pages/User";
 import Address from "./pages/Address";
 import NotFound from "./pages/Page404";
 import ProductInput from "./pages/ProductInput";
-import BuyerRegister from "./pages/BuyerRegister"
-import SellerRegister from "./pages/SellerRegister"
+import BuyerRegister from "./pages/BuyerRegister";
+import SellerRegister from "./pages/SellerRegister";
 
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./layouts/Cart";
@@ -30,8 +30,8 @@ export default function Router() {
         { path: "app", element: <DashboardApp /> },
         { path: "user", element: <User /> },
         { path: "products", element: <Products /> },
-        {path: "product", element: <ProductInput/>},
-        {path: "addresses", element: <Address/>},
+        { path: "product", element: <ProductInput /> },
+        { path: "addresses", element: <Address /> },
         { path: "checkout", element: <Cart /> },
         { path: "products/:id", element: <ProductDetail /> },
         { path: "blog", element: <Blog /> },

@@ -35,7 +35,14 @@ const TokenService = {
   getHeaderwithToken() {
     const headers = {
       "Access-Control-Allow-Origin": "*",
-      // Authorization: "Bearer " + TokenService.getToken(),
+      Authorization: `Bearer ` + TokenService.getToken(),
+    };
+
+    return headers;
+  },
+  getHeader() {
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
     };
 
     return headers;
