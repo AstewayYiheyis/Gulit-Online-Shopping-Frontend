@@ -75,7 +75,7 @@ export default function ProductInputForm() {
             navigate("product", { replace: true });
           } else {
             alert("Product registration is successful.");
-            navigate("products", { replace: true });
+            navigate("../products", { replace: true });
 
             return response;
           }
@@ -110,14 +110,6 @@ export default function ProductInputForm() {
             error={Boolean(touched.price && errors.price)}
             helperText={touched.price && errors.price}
           />
-
-            {/* <TextField
-            fullWidth
-            label="Brand"
-            {...getFieldProps("brand")}
-            error={Boolean(touched.brand && errors.brand)}
-            helperText={touched.brand && errors.brand}
-          /> */}
           </Stack>
 
           <TextareaAutosize
@@ -137,16 +129,6 @@ export default function ProductInputForm() {
             error={Boolean(touched.stockAmount && errors.stockAmount)}
             helperText={touched.stockAmount && errors.stockAmount}
           />
-
-            
-
-        {/* <TextField
-            fullWidth
-            label="Category"
-            {...getFieldProps("category")}
-            error={Boolean(touched.category && errors.category)}
-            helperText={touched.category && errors.category}
-          /> */}
 
           <LoadingButton
             fullWidth

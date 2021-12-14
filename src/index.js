@@ -24,6 +24,8 @@ ReactDOM.render(
       CardAPI: base + "cart/",
       orderAPI: base + "orders/",
       userAPI: base + "users/",
+      buyerAPI: base + "buyers/",
+      sellerAPI: base + "sellers/",
       loginAPI: base + "login/",
       addressAPI: base + "addresses/",
     }}
