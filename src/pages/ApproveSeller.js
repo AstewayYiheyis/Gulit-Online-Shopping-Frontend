@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { filter } from "lodash";
 import { Icon } from "@iconify/react";
 import { sentenceCase } from "change-case";
 import plusFill from "@iconify/icons-eva/plus-fill";
-import { Link as RouterLink } from "react-router-dom";
+
 import _ from "lodash";
 // material
 import {
@@ -27,15 +27,12 @@ import Page from "../components/Page";
 import Label from "../components/Label";
 import Scrollbar from "../components/Scrollbar";
 import SearchNotFound from "../components/SearchNotFound";
-import {
-  UserListHead,
-  UserListToolbar,
-  UserMoreMenu,
-} from "../components/_dashboard/user";
+import { UserListHead, UserListToolbar } from "../components/_dashboard/user";
 import { APIConfig } from "src/store/Api-Config";
 import { TokenService, APIService } from "src/storage.service";
 import axios from "axios";
 import { mockImgAvatar } from "src/utils/mockImages";
+import SellerMenu from "src/components/_dashboard/user/SellerMenu";
 //
 
 // ----------------------------------------------------------------------
@@ -84,13 +81,17 @@ function applySortFilter(array, comparator, query) {
 }
 
 export default function ApproveSeller() {
+  const headers = TokenService.getHeaderwithToken();
+  console.log("header ");
+  console.log(headers);
+
+  const navigate = useNavigate();
+
   const sellerAPI = APIService.sellerAPI;
 
   const [USERLIST, setList] = useState([]);
 
   function fetchSellersHandler() {
-    const headers = TokenService.getHeaderwithToken();
-
     console.log("inside sellers get request" + headers);
 
     console.log(sellerAPI);
@@ -110,7 +111,11 @@ export default function ApproveSeller() {
             role: "Seller",
           };
         });
-        console.log("my updated ");
+
+        console.log("before filter updated ");
+        console.log(updated);
+        updated = updated.filter((s) => s.isVerified == false);
+        console.log("updated lsit");
         console.log(updated);
         setList(updated);
       })
@@ -118,8 +123,7 @@ export default function ApproveSeller() {
         console.log(error.message);
       });
   }
-  console.log(USERLIST);
-  console.log(USERLIST);
+
   useEffect(fetchSellersHandler, []); // This will be fetched when mounted
 
   const [page, setPage] = useState(0);
@@ -284,9 +288,33 @@ export default function ApproveSeller() {
                               {sentenceCase(status)}
                             </Label>
                           </TableCell>
-
                           <TableCell align="right">
-                            <UserMoreMenu />
+                            <Button
+                              variant="contained"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                alert("approval request on seller id" + id);
+
+                                axios
+                                  .put(APIService.sellerAPI + "approve/" + id, {
+                                    headers,
+                                  })
+                                  .then((res) => {
+                                    alert("Seller Approved Successfully");
+                                    fetchSellersHandler();
+                                  })
+                                  .catch((error) => {
+                                    console.log(error.message);
+                                    alert(
+                                      "unable to approve seller. check your detail first"
+                                    );
+                                  });
+                              }}
+                              startIcon={<Icon icon={plusFill} />}
+                            >
+                              Approve
+                            </Button>
+                            <SellerMenu id={id} />
                           </TableCell>
                         </TableRow>
                       );

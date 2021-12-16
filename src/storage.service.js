@@ -35,7 +35,14 @@ const TokenService = {
   getHeaderwithToken() {
     const headers = {
       "Access-Control-Allow-Origin": "*",
-      // Authorization: "Bearer " + TokenService.getToken(),
+      Authorization: `Bearer ` + TokenService.getToken(),
+    };
+
+    return headers;
+  },
+  getHeader() {
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
     };
 
     return headers;
@@ -59,7 +66,7 @@ const SetUser = {
     localStorage.removeItem(USER);
   },
 };
-const base = "http://localhost:8080/";
+const base = "http://172.19.143.222:8080/";
 
 const APIService = {
   productAPI: base + "products/",
