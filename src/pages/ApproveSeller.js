@@ -82,6 +82,8 @@ function applySortFilter(array, comparator, query) {
 
 export default function ApproveSeller() {
   const headers = TokenService.getHeaderwithToken();
+  console.log("header ");
+  console.log(headers);
 
   const navigate = useNavigate();
 
@@ -109,7 +111,11 @@ export default function ApproveSeller() {
             role: "Seller",
           };
         });
-        console.log("my updated ");
+
+        console.log("before filter updated ");
+        console.log(updated);
+        updated = updated.filter((s) => s.isVerified == false);
+        console.log("updated lsit");
         console.log(updated);
         setList(updated);
       })

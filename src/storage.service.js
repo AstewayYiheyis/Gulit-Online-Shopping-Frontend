@@ -66,7 +66,7 @@ const SetUser = {
     localStorage.removeItem(USER);
   },
 };
-const base = "http://localhost:8080/";
+const base = "http://172.19.143.222:8080/";
 
 const APIService = {
   productAPI: base + "products/",
