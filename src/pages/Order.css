@@ -1,4 +1,30 @@
 img{
-    width: 25%;
-    height: 25%;
+    width: 50%;
+    height: 50%;
+}
+
+.orders-list-options{
+    font-size: 26px;
+    padding: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 100%;
+}
+
+.orderbox{
+    border: 2px solid rgb(167, 167, 167);
+    height: fit-content;
+}
+
+.eachorderbox{
+    border: 2px solid rgb(150, 150, 150);
+}
+
+Button{
+    width: 200px;
+}
+
+h1{
+    position: relative;
+    left: 500px;
 }

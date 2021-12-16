@@ -21,10 +21,6 @@ export default function ProductInputForm() {
     productName: Yup.string().required("Product name is required"),
     stockAmount: Yup.string().required("Amount in Stock is required"),
     price: Yup.string().required("Price is required"),
-    // category: Yup.string()
-    // .required("Category is required"),
-    // brand: Yup.string()
-    // .required("Brand is required"),
   });
 
   const formik = useFormik({
