@@ -7,12 +7,15 @@ import { Stack, TextField, TextareaAutosize } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import axios from "axios";
 import { APIConfig } from "src/store/Api-Config";
+import { TokenService } from "src/storage.service";
 
 // ----------------------------------------------------------------------
 
 export default function ProductInputForm() {
   const APIs = useContext(APIConfig);
   const productAPI = APIs.productAPI;
+
+  const headers = TokenService.getHeaderwithToken();
 
   console.log(productAPI);
   const navigate = useNavigate();
@@ -34,9 +37,11 @@ export default function ProductInputForm() {
     },
     validationSchema: RegisterSchema,
     onSubmit: () => {
-      const headers = {
-        "Access-Control-Allow-Origin": "*",
-      };
+      // const headers = {
+      //   "Access-Control-Allow-Origin": "*",
+      // };
+
+      console.log("token is \n" + TokenService.getToken());
 
       console.log("inside user registration-POST request");
 
@@ -93,13 +98,13 @@ export default function ProductInputForm() {
               helperText={touched.productName && errors.productName}
             />
 
- <TextField
+            <TextField
               fullWidth
               label="Price"
               {...getFieldProps("price")}
               error={Boolean(touched.price && errors.price)}
               helperText={touched.price && errors.price}
-            />          
+            />
           </Stack>
 
           <TextareaAutosize

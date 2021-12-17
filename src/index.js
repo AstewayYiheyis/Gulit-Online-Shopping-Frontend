@@ -27,7 +27,11 @@ ReactDOM.render(
       buyerAPI: base + "buyers/",
       sellerAPI: base + "sellers/",
       loginAPI: base + "login/",
-      addressAPI: base + "addresses/"
+      addressAPI: base + "addresses/",
+      buyerShippingAddAPI: base + "buyers/shippingAddress/",
+      buyerBillingAddAPI: base + "buyers/BillingAddress/",
+      cartAPI: base + "carts/",
+      cartItemUpdateAPI: base + "carts/cart-items/",
     }}
   >
     <HelmetProvider>

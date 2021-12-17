@@ -16,12 +16,13 @@ import {
   ProductCartWidget,
   ProductFilterSidebar,
 } from "../components/_dashboard/products";
-import { APIService } from "src/storage.service";
+import { APIService, TokenService } from "src/storage.service";
 
 // ----------------------------------------------------------------------
 
 export default function EcommerceShop() {
   const [openFilter, setOpenFilter] = useState(false);
+  const headers = TokenService.getHeaderwithToken();
 
   const formik = useFormik({
     initialValues: {
@@ -67,10 +68,6 @@ export default function EcommerceShop() {
     },
   ]);
   function fetchProductsHandler() {
-    const headers = {
-      "Access-Control-Allow-Origin": "*",
-    };
-
     console.log("inside products get request");
     console.log(productAPI);
     axios(productAPI, { headers })
