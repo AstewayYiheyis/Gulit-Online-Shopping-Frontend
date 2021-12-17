@@ -10,6 +10,7 @@ import { Stack, TextField, IconButton, InputAdornment } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import axios from "axios";
 import { APIConfig } from "src/store/Api-Config";
+import { TokenService } from "src/storage.service";
 
 // ----------------------------------------------------------------------
 
@@ -43,9 +44,9 @@ export default function AddressForm() {
     },
     validationSchema: RegisterSchema,
     onSubmit: () => {
-      const headers = {
-        "Access-Control-Allow-Origin": "*",
-      };
+      const headers = TokenService.getHeaderwithToken();
+
+      
 
       console.log("inside user registration-POST request");
 
