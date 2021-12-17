@@ -19,8 +19,9 @@ export default function Order() {
   const orderAPI = APIs.orderAPI;
 
   const cartAPI = APIs.cartAPI;
-
+  const cartItemUpdateAPI = APIs.cartItemUpdateAPI;
   const [products, setProducts] = useState([]);
+  const [updated, setUpdated] = useState(false);
 
   console.log(cartAPI);
 
@@ -30,7 +31,7 @@ export default function Order() {
       .then((res) => {
         let updated = _.map(res.data, (data) => {
           return {
-            id: data.product.id,
+            id: data.cartItemId,
             avatarUrl: mockImgAvatar(data.product.id),
             name: data.product.name,
             quantity: data.quantity,
@@ -45,14 +46,14 @@ export default function Order() {
 
       .catch((err) => console.log(err));
   }
-  useEffect(getOrders, []);
+  useEffect(getOrders, [updated]);
 
-  function CancelOrderHandler() {
-    axios
-      .delete(orderAPI)
-      .then((res) => navigate("../orders"))
-      .catch((err) => console.log(err));
-  }
+  //   function CancelOrderHandler() {
+  //     axios
+  //       .delete(cartItemUpdateAPI + product.id, { headers })
+  //       .then((res) => navigate("../orders"))
+  //       .catch((err) => console.log(err));
+  //   }
 
   const rproduct = products.map((product) => {
     return (
@@ -75,12 +76,24 @@ export default function Order() {
               </Link>
             </div>
             <div>
-              <Link to="/">
-                <Button variant="contained" onClick={CancelOrderHandler}>
-                  {" "}
-                  Cancel Order{" "}
-                </Button>
-              </Link>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  console.log(
+                    "trying to delete " + cartItemUpdateAPI + product.id
+                  );
+                  axios
+                    .delete(cartItemUpdateAPI + product.id, { headers })
+                    .then((res) => {
+                      alert("Product " + product.name + " removed succesully");
+                      return setUpdated(!updated);
+                    })
+                    .catch((err) => console.log(err.message));
+                }}
+              >
+                {" "}
+                Cancel Order{" "}
+              </Button>
             </div>
           </div>
         </Stack>
