@@ -22,7 +22,6 @@ ReactDOM.render(
     value={{
       productAPI: base + "products/",
       reviewAPI: "reviews/",
-      CardAPI: base + "cart/",
       orderAPI: base + "orders/",
       userAPI: base + "users/",
       buyerAPI: base + "buyers/",
