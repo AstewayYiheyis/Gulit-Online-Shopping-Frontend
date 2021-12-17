@@ -68,8 +68,7 @@ const SetUser = {
 const base = "http://localhost:8080/";
 
 const APIService = {
-  productAPI: base + "products/",
-  CardAPI: base + "cart/",
+  productAPI: base + "products/", 
   orderAPI: base + "orders/",
   userAPI: base + "users/",
   loginAPI: base + "login/",

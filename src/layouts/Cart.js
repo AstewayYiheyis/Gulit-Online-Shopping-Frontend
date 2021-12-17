@@ -170,7 +170,8 @@ const Cart = (props) => {
     cartRemoveAllItemsRemoveHandler();
     console.log(cartCtx.items);
 
-    navigate("../products");
+    alert("ordered succesfully");
+    navigate("../orders");
   };
 
   function addItemstoDBCart(cartItemRequest) {
@@ -181,11 +182,11 @@ const Cart = (props) => {
     axios
       .post(cartAPI, cartItemRequest, { headers })
       .then((response) => {
-        alert(cartItemRequest.name + " ordered successfully");
+        //  alert(cartItemRequest.name + " ordered successfully");
       })
       .catch((error) => {
         console.log(error.message);
-        alert(error.message);
+        // alert(error.message);
       });
   }
   return (
