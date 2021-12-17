@@ -33,11 +33,7 @@ const sidebarConfig = [
     path: "/dashboard/product",
     icon: getIcon(fileTextFill),
   },
-  {
-    title: "Product Review",
-    path: "/dashboard/blog",
-    icon: getIcon(fileTextFill),
-  },
+
   {
     title: "Seller Management",
     path: "/dashboard/ApproveSeller",
@@ -57,11 +53,6 @@ const sidebarConfig = [
     title: "register-Admin",
     path: "/register",
     icon: getIcon(personAddFill),
-  },
-  {
-    title: "login",
-    path: "/login",
-    icon: getIcon(lockFill),
   },
 ];
 export default sidebarConfig;

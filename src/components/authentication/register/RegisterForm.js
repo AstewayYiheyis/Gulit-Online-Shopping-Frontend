@@ -17,7 +17,6 @@ export default function RegisterForm() {
   const APIs = useContext(APIConfig);
   const userAPI = APIs.userAPI;
 
-  //const userAPI = "http://172.19.143.222:8080/users/";
   console.log(userAPI);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);

@@ -20,24 +20,24 @@ import MenuPopover from "../../components/MenuPopover";
 //
 import account from "../../_mocks_/account";
 
-import { TokenService } from "src/storage.service";
+import { SetUser, TokenService } from "src/storage.service";
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
   {
     label: "Home",
     icon: homeFill,
-    linkTo: "/dashboard",
+    linkTo: "app",
   },
   {
-    label: "Profile",
+    label: "Orders",
     icon: personFill,
-    linkTo: "#",
+    linkTo: "Orders",
   },
   {
     label: "Settings",
     icon: settings2Fill,
-    linkTo: "#",
+    linkTo: "UserSettings",
   },
 ];
 
@@ -59,6 +59,7 @@ export default function AccountPopover() {
     console.log("on logout");
     console.log(TokenService.getToken());
     TokenService.removeToken();
+    SetUser.removeUser();
     console.log("after remove t");
     console.log(TokenService.getToken());
     window.location.reload(true);
