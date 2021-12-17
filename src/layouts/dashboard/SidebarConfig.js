@@ -18,9 +18,9 @@ const sidebarConfig = [
     icon: getIcon(pieChart2Fill),
   },
   {
-    title: "user",
-    path: "/dashboard/user",
-    icon: getIcon(peopleFill),
+    title: "My Orders",
+    path: "/dashboard/orders",
+    icon: getIcon(shoppingBagFill),
   },
   {
     title: "product",
