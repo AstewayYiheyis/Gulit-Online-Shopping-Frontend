@@ -22,8 +22,6 @@ export default function Order() {
 
   const [products, setProducts] = useState([]);
 
-  console.log(cartAPI);
-
   const headers = TokenService.getHeaderwithToken();
   function getOrders() {
     axios(cartAPI, { headers })
@@ -70,7 +68,7 @@ export default function Order() {
           <p>Product Name:{product.name} </p>
           <div className="orders-list-options">
             <div>
-              <Link to={`/products/${product.id}/reviews`}>
+              <Link to={`../products/${product.id}/reviews`}>
                 <Button variant="contained"> Write a product review </Button>
               </Link>
             </div>

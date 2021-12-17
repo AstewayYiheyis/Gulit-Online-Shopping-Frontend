@@ -65,7 +65,7 @@ export default function ReviewForm(props) {
                 };
 
                 console.log(data);
-                axios.post("http://172.19.143.222:8080/products/1/reviews/add", data, { headers })
+                axios.post(reviewAPI, data, { headers })
                     .then((res) => {
                         const response = res.data;
                         if (
