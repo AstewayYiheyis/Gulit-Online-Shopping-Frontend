@@ -81,7 +81,7 @@ const CartProvider = (props) => {
 
   const addItemToCartHandler = (item) => {
     dispatchCartAction({ type: "ADD", item: item });
-    addItemstoDBCart(item);
+    // addItemstoDBCart(item);
   };
   function addItemstoDBCart(itemsToBeAdded) {
     const cartItemRequest = {
@@ -125,7 +125,7 @@ const CartProvider = (props) => {
   const removeItemFromCartHandler = (id) => {
     dispatchCartAction({ type: "REMOVE", id: id });
 
-    removeItemFromCartDBCart(id);
+    //  removeItemFromCartDBCart(id);
   };
   const removeAllItemsFromCartHandler = () => {
     dispatchCartAction({ type: "REMOVEALL" });

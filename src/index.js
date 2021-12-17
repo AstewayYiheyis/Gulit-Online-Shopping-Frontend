@@ -15,7 +15,7 @@ import { APIConfig } from "./store/Api-Config";
 
 // ----------------------------------------------------------------------
 
-const base = "http://172.19.143.222:8080/";
+const base = "http://localhost:8080/";
 
 ReactDOM.render(
   <APIConfig.Provider

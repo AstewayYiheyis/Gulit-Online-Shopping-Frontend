@@ -51,22 +51,21 @@ const TokenService = {
 
 const SetUser = {
   getUser() {
-    let user = localStorage.getItem(USER);
-    return JSON.parse(user);
+    return localStorage.getItem(USER);
   },
   isAdmin() {
     let user = this.getUser();
     return user != null ? user.role == "admin" : false;
   },
   saveUser(user) {
-    localStorage.setItem(USER, JSON.stringify(user));
+    localStorage.setItem(USER, user);
   },
 
   removeUser() {
     localStorage.removeItem(USER);
   },
 };
-const base = "http://172.19.143.222:8080/";
+const base = "http://localhost:8080/";
 
 const APIService = {
   productAPI: base + "products/",

@@ -7,7 +7,6 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import DashboardApp from "./pages/DashboardApp";
 import Products from "./pages/Products";
-import Blog from "./pages/Blog";
 import User from "./pages/User";
 import Address from "./pages/Address";
 import NotFound from "./pages/Page404";
@@ -18,9 +17,10 @@ import SellerRegister from "./pages/SellerRegister";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./layouts/Cart";
 import ApproveSeller from "./pages/ApproveSeller";
-import Order from "./pages/Order"
-import Review from "./pages/Review"
-import ListOfReviews from './pages/ListOfReviews'
+import Order from "./pages/Order";
+import Review from "./pages/Review";
+import ListOfReviews from "./pages/ListOfReviews";
+import UserSettings from "./pages/UserSettings";
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -33,15 +33,15 @@ export default function Router() {
         { path: "app", element: <DashboardApp /> },
         { path: "user", element: <User /> },
         { path: "products", element: <Products /> },
+        { path: "products/:id", element: <ProductDetail /> },
         { path: "product", element: <ProductInput /> },
         { path: "products/:id/reviews", element: <Review /> },
         { path: "products/:id/listofreviews", element: <ListOfReviews /> },
         { path: "addresses", element: <Address /> },
         { path: "checkout", element: <Cart /> },
-        { path: "products/:id", element: <ProductDetail /> },
-        { path: "blog", element: <Blog /> },
         { path: "approveSeller", element: <ApproveSeller /> },
         { path: "orders", element: <Order /> },
+        { path: "UserSettings", element: <UserSettings /> },
       ],
     },
     {

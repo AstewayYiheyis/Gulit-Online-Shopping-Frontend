@@ -37,9 +37,6 @@ export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  // console.log("done manually");
-  //TokenService.saveToken("deee");
-
   const isLoggedIn = TokenService.getToken();
   console.log(TokenService.getToken());
 

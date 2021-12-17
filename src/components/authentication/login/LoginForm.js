@@ -6,7 +6,7 @@ import { Icon } from "@iconify/react";
 import eyeFill from "@iconify/icons-eva/eye-fill";
 import eyeOffFill from "@iconify/icons-eva/eye-off-fill";
 
-import { TokenService } from "src/storage.service";
+import { SetUser, TokenService } from "src/storage.service";
 
 // material
 import {
@@ -28,7 +28,6 @@ export default function LoginForm() {
   const APIs = useContext(APIConfig);
   const loginAPI = APIs.loginAPI;
 
-  //const loginAPI = "http://172.19.143.222:8080/login";
   console.log(loginAPI);
 
   const navigate = useNavigate();
@@ -72,6 +71,8 @@ export default function LoginForm() {
             navigate("/login", { replace: true });
           } else {
             TokenService.saveToken(response.jwt);
+            SetUser.saveUser(data.username);
+            alert("user setted to" + SetUser.getUser());
             console.log("saved token is ");
             console.log(TokenService.getToken());
 
