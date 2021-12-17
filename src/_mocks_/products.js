@@ -3,6 +3,7 @@ import axios from "axios";
 import { APIConfig } from "src/store/Api-Config";
 // utils
 import { mockImgProduct } from "../utils/mockImages";
+import { TokenService } from "src/storage.service";
 
 // ----------------------------------------------------------------------
 
@@ -24,9 +25,7 @@ const Products = () => {
     },
   ]);
 
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-  };
+  const headers = TokenService.getHeaderwithToken();
 
   axios(productAPI, { headers })
     .then((response) => {

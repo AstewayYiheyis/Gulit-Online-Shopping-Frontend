@@ -21,6 +21,7 @@ ReactDOM.render(
   <APIConfig.Provider
     value={{
       productAPI: base + "products/",
+      reviewAPI: "reviews/",
       CardAPI: base + "cart/",
       orderAPI: base + "orders/",
       userAPI: base + "users/",

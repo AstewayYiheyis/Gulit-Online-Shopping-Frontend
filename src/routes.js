@@ -19,6 +19,8 @@ import ProductDetail from "./pages/ProductDetail";
 import Cart from "./layouts/Cart";
 import ApproveSeller from "./pages/ApproveSeller";
 import Order from "./pages/Order"
+import Review from "./pages/Review"
+import ListOfReviews from './pages/ListOfReviews'
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -32,6 +34,8 @@ export default function Router() {
         { path: "user", element: <User /> },
         { path: "products", element: <Products /> },
         { path: "product", element: <ProductInput /> },
+        { path: "products/:id/reviews", element: <Review /> },
+        { path: "products/:id/listofreviews", element: <ListOfReviews /> },
         { path: "addresses", element: <Address /> },
         { path: "checkout", element: <Cart /> },
         { path: "products/:id", element: <ProductDetail /> },
